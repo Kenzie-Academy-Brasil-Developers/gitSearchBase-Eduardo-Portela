@@ -2,12 +2,9 @@
 
 const valueUser = JSON.parse(localStorage.getItem("UserSearch"))
 
-// const buttonPerfilValue = localStorage.getItem("buttonPerfil")
-// console.log(buttonPerfilValue)
-
 const baseURL = "https://api.github.com/users"
 
-async function getDetails(user){
+export async function getDetails(user){
     const userDetails = await
     getDatas(`${baseURL}/${user}`)
     const repositories = await getDatas(`${baseURL}/${user}/repos`)
@@ -56,7 +53,5 @@ ${repositories.map((repository) => {
 </ul>
 `)
 }
-
-//getDetails(valueUser[2]).then(resp => console.log(resp))
 
 valueUser.length == 1 ? getDetails(valueUser[0]) : valueUser.length == 2 ?getDetails(valueUser[1]) : getDetails(valueUser[2])

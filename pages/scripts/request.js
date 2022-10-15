@@ -1,26 +1,14 @@
-// function getDatas(url){
+async function getDatas(url){
+  // const buttonDefault = document.querySelector(".form .button-search")
+    try{
+    const data = await fetch(url)
+    const dataJson = await data.json()
+    return dataJson;
 
-//     const data =  fetch(url)
-//     .then(res => {
-//       if(res.ok){
-//         return res.json()
-//       }else{
-//         console.log("Entrei aqui")
-//         res.json().then(response => {
-//           throw new Error(response.message)
-//         })
-//       }
-//       }).catch(e => console.log("adasadasdas")) 
-// }
-
-
-
-
-/*  if(dataJson.message == "Not Found"){
-      const linkProfile =  document.querySelector(".link-profile")
-      linkProfile.addEventListener("click", (e) => {
-        e.preventDefault()
-      })
-      console.log("asuhuiahsuidhiuaus")
-      throw new Error("USUARIO NÂO ENCONTRADO 1")
-    }*/
+    }catch(error){  
+      const span = document.querySelector(".error")
+      span.innerText = "Usuario não encontrado"
+      console.log("USUARIO NÂO ENCONTRADO 2")
+    }
+    buttonPerfil.innerText = `Ver perfil do github`
+}

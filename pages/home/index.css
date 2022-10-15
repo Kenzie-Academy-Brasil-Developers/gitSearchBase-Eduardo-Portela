@@ -117,14 +117,15 @@ width: 50%;
 .recents-users-box{
     display: flex;
     width: 450px;
-    align-items: center;    
+    align-items: center;
+    margin-left: 30px;    
 }
 
 .recent-user{
     display: flex;
     flex-direction: column;
     align-items: center;
-    margin: 0 16px 10px 0;
+    margin: 0 10px 10px 0;
     transform: translateY(-10px);
 }
 
@@ -133,9 +134,8 @@ width: 50%;
     height: 50px;
     border-radius: 50%;
     margin-bottom: 8px;
-    cursor: pointer;
 }
-.recent-user a{
+.recent-user .acess-user{
     border-radius: 8px;
     padding: 2px;
     width: max-content;
@@ -143,19 +143,18 @@ width: 50%;
     text-decoration: none;
     color: var(--color-grey-1);
     background-color: var(--color-grey-7);
+    visibility: hidden;
+    font-weight: 600;
+    cursor: pointer;
 
 }
 
-.recent-user img:hover, a:hover{
-    display: inline-block;
+.recent-user:hover > .acess-user{
+    visibility: visible;
 }
 
 .recent-list{
     display: flex;
-}
-
-.show{
-    visibility: hidden;
 }
 
 .error{
