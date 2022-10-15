@@ -4,7 +4,7 @@ const valueUser = JSON.parse(localStorage.getItem("UserSearch"))
 
 const baseURL = "https://api.github.com/users"
 
-export async function getDetails(user){
+async function getDetails(user){
     const userDetails = await
     getDatas(`${baseURL}/${user}`)
     const repositories = await getDatas(`${baseURL}/${user}/repos`)
