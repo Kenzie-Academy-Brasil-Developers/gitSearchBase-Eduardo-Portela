@@ -10,35 +10,40 @@ let storageArray = JSON.parse(localStorage.getItem("UserSearch"))
 
 
 function addItem(){
-    let userInput = document.getElementById("user").value  
-    // console.log(getDatas(`https://api.github.com/users/${storageArray[2]}`))
-     fetch(`https://api.github.com/users/${userInput}`)
-     .then(res => {
-        buttonPerfil.innerText = "Ver perfil do github"
-        if(res.ok){
-            if(localStorage.UserSearch){
-                userInputValue = JSON.parse(localStorage.getItem('UserSearch'))
-            }
-        
-            if(userInputValue.length == 3){
-                userInputValue.shift()
-            }
-        
-            userInputValue.push(userInput)
-        
-            document.getElementById("user").value = "";
-        
-            localStorage.UserSearch = JSON.stringify(userInputValue)
-            window.location.assign("pages/profile/index-profile.html")
-        }else{
-            const span = document.querySelector(".error")
-            span.innerText = "Usuario não encontrado"
-        }
-     })
+    buttonPerfil.addEventListener("click", ()=> {
 
-     buttonPerfil.innerHTML = `<div class="loader">Loading...</div>`
+        let userInput = document.getElementById("user").value  
+        // console.log(getDatas(`https://api.github.com/users/${storageArray[2]}`))
+         fetch(`https://api.github.com/users/${userInput}`)
+         .then(res => {
+            buttonPerfil.innerText = "Ver perfil do github"
+            if(res.ok){
+                if(localStorage.UserSearch){
+                    userInputValue = JSON.parse(localStorage.getItem('UserSearch'))
+                }
+            
+                if(userInputValue.length == 3){
+                    userInputValue.shift()
+                }
+            
+                userInputValue.push(userInput)
+            
+                document.getElementById("user").value = "";
+            
+                localStorage.UserSearch = JSON.stringify(userInputValue)
+                window.location.assign("pages/profile/index-profile.html")
+            }else{
+                const span = document.querySelector(".error")
+                span.innerText = "Usuario não encontrado"
+            }
+         })
+    
+         buttonPerfil.innerHTML = `<div class="loader">Loading...</div>`
+    })
 
 }
+
+addItem()
 
 
    let inputCamp = document.querySelector("#user")
@@ -82,32 +87,33 @@ searchRecents()
 
 
 
+/*function addItem(){
+    let userInput = document.getElementById("user").value  
+    // console.log(getDatas(`https://api.github.com/users/${storageArray[2]}`))
+     fetch(`https://api.github.com/users/${userInput}`)
+     .then(res => {
+        buttonPerfil.innerText = "Ver perfil do github"
+        if(res.ok){
+            if(localStorage.UserSearch){
+                userInputValue = JSON.parse(localStorage.getItem('UserSearch'))
+            }
+        
+            if(userInputValue.length == 3){
+                userInputValue.shift()
+            }
+        
+            userInputValue.push(userInput)
+        
+            document.getElementById("user").value = "";
+        
+            localStorage.UserSearch = JSON.stringify(userInputValue)
+            window.location.assign("pages/profile/index-profile.html")
+        }else{
+            const span = document.querySelector(".error")
+            span.innerText = "Usuario não encontrado"
+        }
+     })
 
+     buttonPerfil.innerHTML = `<div class="loader">Loading...</div>`
 
-
-
-
-
-
-
-
-
-// setTimeout(async ()=> {
-    
-//     const acessUser = [...document.querySelectorAll(".user-img")]
-//     const acesslink = document.querySelectorAll(".acess-user")
-
-//     acessUser.forEach(async(user)=>{
-//         //const userDetails = await getDatas(`${baseURL2}/${user}`)
-//         user.addEventListener("click", () => {
-//             acesslink.forEach((link) => {
-//                     if(link.id == user.id){
-//                         link.classList.toggle("show")   
-//                     }
-//             })
-
-//         })
-//     })
-
-
-// }, 1000)
+}*/
