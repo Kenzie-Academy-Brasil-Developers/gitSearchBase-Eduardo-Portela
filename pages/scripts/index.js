@@ -13,7 +13,6 @@ function addItem(){
     buttonPerfil.addEventListener("click", ()=> {
 
         let userInput = document.getElementById("user").value  
-        // console.log(getDatas(`https://api.github.com/users/${storageArray[2]}`))
          fetch(`https://api.github.com/users/${userInput}`)
          .then(res => {
             buttonPerfil.innerText = "Ver perfil do github"
@@ -63,57 +62,38 @@ addItem()
 
 async function searchRecents(){
     const recentList = document.querySelector(".recent-list")
-    storageArray.reverse()
+    if(storageArray != null){
+        storageArray.reverse()
     storageArray.forEach(async element => {
         const userDetails = await getDatas(`${baseURL2}/${element}`)
         recentList.insertAdjacentHTML("beforeend", `
             <li class="recent-user">
                 <img class="user-img" id="${userDetails.id}" src="${userDetails.avatar_url}" alt="">
-                <button class="acess-user" id="${userDetails.id}"> Acessar user</button>
+                <button class="acess-user" id="${userDetails.login}"> Acessar user</button>
             </li>
 
-        `)
+        `) 
     });
+}
 }
 
 searchRecents()
 
-
-
-
-
-
-
-
-
-
-/*function addItem(){
-    let userInput = document.getElementById("user").value  
-    // console.log(getDatas(`https://api.github.com/users/${storageArray[2]}`))
-     fetch(`https://api.github.com/users/${userInput}`)
-     .then(res => {
-        buttonPerfil.innerText = "Ver perfil do github"
-        if(res.ok){
-            if(localStorage.UserSearch){
-                userInputValue = JSON.parse(localStorage.getItem('UserSearch'))
-            }
-        
-            if(userInputValue.length == 3){
-                userInputValue.shift()
-            }
-        
-            userInputValue.push(userInput)
-        
-            document.getElementById("user").value = "";
-        
-            localStorage.UserSearch = JSON.stringify(userInputValue)
-            window.location.assign("pages/profile/index-profile.html")
-        }else{
-            const span = document.querySelector(".error")
-            span.innerText = "Usuario não encontrado"
-        }
-     })
-
-     buttonPerfil.innerHTML = `<div class="loader">Loading...</div>`
-
-}*/
+setTimeout( () => {
+    const buttonRecent = document.querySelectorAll(".acess-user")
+    buttonRecent.forEach((button) => {
+        button.addEventListener("click", ()=>{
+            storageArray.forEach(async (element) => {
+                const userDetails = await getDatas(`${baseURL2}/${element}`)
+                if(button.id == userDetails.login){
+                    const index = storageArray.findIndex((ele) => ele.toLowerCase() == button.id.toLowerCase())
+                    storageArray.splice(index,1)
+                    storageArray.push(userDetails.login)
+                    localStorage.UserSearch = JSON.stringify(storageArray)
+                    window.location.assign("pages/profile/index-profile.html")
+                }
+                
+            })
+        })
+    })
+},1000)

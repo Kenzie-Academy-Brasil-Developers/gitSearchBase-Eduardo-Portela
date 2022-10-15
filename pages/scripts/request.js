@@ -6,9 +6,6 @@ async function getDatas(url){
     return dataJson;
 
     }catch(error){  
-      const span = document.querySelector(".error")
-      span.innerText = "Usuario não encontrado"
-      console.log("USUARIO NÂO ENCONTRADO 2")
+      console.log("USUARIO NÂO ENCONTRADO")
     }
-    buttonPerfil.innerText = `Ver perfil do github`
 }
