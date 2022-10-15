@@ -1,5 +1,4 @@
 /* Desenvolva sua lógica aqui...*/
-//import {getDetails} from "./indexProfile.js"
 
 const buttonPerfil = document.querySelector(".form .button-search")
 
